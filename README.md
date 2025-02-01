@@ -27,6 +27,6 @@ Nodejs install: https://nodejs.org/
 
 Run in Terminal to Install: 
 
-'''
+```
 npm install axios cheerio
-'''
+```
