@@ -26,7 +26,7 @@ button {
     padding-right: 20px;
     font-weight: bold;
     margin-top: 10px;
-    margin-left: 230px;
+    margin-left: 250px;
     background-color: rgb(255, 255, 255);
     transition: background-color 1s ease; /* Add transition for background color */
     font-family:'Courier New', Courier, monospace;
@@ -47,5 +47,5 @@ body {
     margin-bottom: 30px;
     margin-right: 35px;
     margin-left: 35px;
-    min-width: 300px;
+    min-width: 350px;
 }
