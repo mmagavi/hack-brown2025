@@ -22,8 +22,11 @@ Maya Magavi
 # Web Scraping
 
 Using Nodejs, Cheerio, and Axios to scrape Reddit pages
+
 Nodejs install: https://nodejs.org/
+
 Run in Terminal to Install: 
+
 '''
 npm install axios cheerio
 '''
