@@ -1,0 +1,51 @@
+html {
+    border: none;
+    border-radius: 300px;
+}
+
+h1 {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.head-2 {
+    display: flex;
+    padding-bottom: 15px;
+}
+
+.text-field {
+    display: flex;
+    font-size: 20px;
+}
+
+button {
+    display: flex;
+    border-radius: 15px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 230px;
+    background-color: rgb(255, 255, 255);
+    transition: background-color 1s ease; /* Add transition for background color */
+    font-family:'Courier New', Courier, monospace;
+    border-width: 1px;
+}
+
+button:hover {
+    background-color: whitesmoke;
+}
+
+body {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 300px;
+    color: black;
+    font-family:'Courier New', Courier, monospace;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 35px;
+    margin-left: 35px;
+    min-width: 300px;
+}
