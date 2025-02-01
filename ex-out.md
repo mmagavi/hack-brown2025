@@ -1,3 +1,5 @@
+Prompt: You are a user reading an online forum site about a certain disease. You want to be sure that the posts you are reading are not written in a misleading way or by relying heavily on anecdotes to make conclusions. Read this post, and find the central claim and the pieces of evidence used to support it. Classify each of those pieces of evidence as one of the following: anecdotal, unlikely to be supported by evidence, misleading, untrue, likely to be supported by evidence, not misleading, true.
+
 ### **Analysis of the Post**
 
 #### **Central Claim:**
