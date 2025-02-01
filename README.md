@@ -18,3 +18,12 @@ Maya Magavi
 6. Design + messaging
 7. Stated goals
 8. Fun name
+
+# Web Scraping
+
+Using Nodejs, Cheerio, and Axios to scrape Reddit pages
+Nodejs install: https://nodejs.org/
+Run in Terminal to Install: 
+'''
+npm install axios cheerio
+'''
