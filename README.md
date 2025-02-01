@@ -32,6 +32,8 @@ npm install axios cheerio
 ```
 
 # API Call/Prompt
+gmail: verifyaiteam@gmail.com
+pass: verifyaiteam3?
 
 
 
