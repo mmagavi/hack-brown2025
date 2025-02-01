@@ -4,11 +4,12 @@ html {
 }
 
 h1 {
-    font-weight: 400;
+    font-weight: bold;
     font-size: 20px;
 }
 
 .head-2 {
+    font-weight: bold;
     display: flex;
     padding-bottom: 15px;
 }
@@ -25,16 +26,23 @@ button {
     padding-left: 20px;
     padding-right: 20px;
     font-weight: bold;
-    margin-top: 10px;
-    margin-left: 230px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     background-color: rgb(255, 255, 255);
     transition: background-color 1s ease; /* Add transition for background color */
     font-family:'Courier New', Courier, monospace;
     border-width: 1px;
+    margin-left: 132.5px;
 }
 
 button:hover {
-    background-color: whitesmoke;
+    background-image: linear-gradient(to top right, rgb(239, 212, 253), white);
+}
+
+img {
+    max-width: 60px;
+    margin: none;
+    padding: none;
 }
 
 body {
@@ -47,5 +55,14 @@ body {
     margin-bottom: 30px;
     margin-right: 35px;
     margin-left: 35px;
-    min-width: 300px;
+    min-width: 350px;
+    text-align: center;
+    align-items: center;
+}
+
+a {
+    color: black;
+    font-size: x-small;
+    text-decoration: none;
+    margin-top: 20px;
 }

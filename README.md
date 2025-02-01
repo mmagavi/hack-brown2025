@@ -32,4 +32,11 @@ npm install axios cheerio
 ```
 
 # API Call/Prompt
+gmail: verifyaiteam@gmail.com
+pass: verifyaiteam3?
 
+
+
+
+# Attribution
+"https://www.flaticon.com/free-icons/health"
