@@ -72,18 +72,13 @@ function createTextEntryBox() {
     }
 }
 
-// Call the start function when the popup loads
-document.addEventListener('DOMContentLoaded', start);
-
-// Add event listeners to the buttons
-document.addEventListener('DOMContentLoaded', () => {
-    const textEntryButton = document.getElementById('text-entry-button');
-    textEntryButton.addEventListener('click', createTextEntryBox);
-})
-
 
 //Function that feeds the post content to the GPT-4o model and generates a response
 async function generateResponse() {
+    console.log('Generating response...');
+    const verifyButton = document.getElementById('verify-button');
+    verifyButton.textContent = 'Verifying...';
+    verifyButton.disabled = true; // Disable the button to prevent multiple clicks
     try {
         let userContent = has_manual_input ? manual_input : post_content[0];
         const completion = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -123,12 +118,13 @@ async function generateResponse() {
 function displayResponse() {
     const head2Div = document.querySelector('.head-2');
     const textFieldDiv = document.getElementById('text-field');
-    const verifyButton = document.querySelector('button');
+    const verifyButton = document.getElementById('verify-button');
     const manualTextButton = document.getElementById('text-entry-button');
     const textEntryContainer = document.getElementById('text-entry-container');
     const aContainer = document.querySelector('.a-container');
     
     // Hide the elements
+    verifyButton.style.display = 'none';
     head2Div.style.display = 'none';
     textFieldDiv.style.display = 'none';
     verifyButton.style.display = 'none';
@@ -155,11 +151,19 @@ function displayResponse() {
         verifyButton.style.display = 'block';
         manualTextButton.style.display = 'block';
         textEntryContainer.style.display = 'block';
+        verifyButton.style.display = 'block';
+        verifyButton.textContent = 'Verify';
+        verifyButton.disabled = false;
         responseDiv.remove();
         backButton.remove();
     });
 }
 
+//Generate and display response when verify button is clicked
+// document.querySelector('button').addEventListener('click', async () => {
+//     await generateResponse();
+//     displayResponse();
+// });
 
 // Call the start function when the popup loads
 document.addEventListener('DOMContentLoaded', start);
@@ -169,3 +173,6 @@ verifyButton.addEventListener('click', async () => {
     await generateResponse();
     displayResponse();
 });
+
+const manualInputButton = document.getElementById('text-entry-button');
+manualInputButton.addEventListener('click', createTextEntryBox);
