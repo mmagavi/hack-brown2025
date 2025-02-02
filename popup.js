@@ -3,6 +3,9 @@ console.log('This is a popup!');
 // Data needed throughout the script
 let post_title = '';
 let post_content = [];
+let manual_input = '';
+let has_manual_input = false;
+
 let response = '';
 
 // Get the current tab URL, and scrape the site for the post title and content
@@ -12,7 +15,7 @@ async function start() {
     console.log(url);
     await scrapeSite(url);
     const textFieldDiv = document.getElementById('text-field');
-    const my_string = "\"" + post_title + post_content + "... \""
+    const my_string = "\"" + post_title + '-' + post_content + "... \""
     textFieldDiv.textContent = truncateString(my_string, 195);
 }
 
@@ -39,6 +42,45 @@ function truncateString(str, num) {
     }
     return str.slice(0, num) + '... \"';
 }
+
+// Function to create or toggle the text entry box
+function createTextEntryBox() {
+    const container = document.getElementById('text-entry-container');
+    const textEntryButton = document.getElementById('text-entry-button');
+    const existingInput = container.querySelector('input');
+    if (existingInput) {
+        // If the input exists, remove it
+        container.removeChild(existingInput);
+        textEntryButton.textContent = 'Manual Text Entry';
+        const textFieldDiv = document.getElementById('text-field');
+        const my_string = "\"" + post_title + '-' + post_content + "... \""
+        has_manual_input = false;
+        textFieldDiv.textContent = truncateString(my_string, 195);
+    } else {
+        // If the input does not exist, create it
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Enter your text here';
+        container.appendChild(input);
+        textEntryButton.textContent = 'Automatic Text Entry';
+        input.addEventListener('input', () => {
+            manual_input = input.value;
+            has_manual_input = true;
+            const textFieldDiv = document.getElementById('text-field');
+            textFieldDiv.textContent = truncateString("\"" + manual_input + "\"", 195);
+        });
+    }
+}
+
+// Call the start function when the popup loads
+document.addEventListener('DOMContentLoaded', start);
+
+// Add event listeners to the buttons
+document.addEventListener('DOMContentLoaded', () => {
+    const textEntryButton = document.getElementById('text-entry-button');
+    textEntryButton.addEventListener('click', createTextEntryBox);
+})
+
 
 //Function that feeds the post content to the GPT-4o model and generates a response
 async function generateResponse() {
