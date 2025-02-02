@@ -25,6 +25,7 @@ img {
     display: flex;
     font-size: 20px;
     font-style: italic;
+    margin-bottom: 15px;
 }
 
 button {
@@ -34,13 +35,12 @@ button {
     padding-left: 20px;
     padding-right: 20px;
     font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     background-color: rgb(255, 255, 255);
     transition: background-color 1s ease; /* Add transition for background color */
     font-family:'Courier New', Courier, monospace;
     border-width: 1px;
-    margin-left: 132.5px;
 }
 
 button:hover {
@@ -48,6 +48,10 @@ button:hover {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border: none;
     background-color: #ffffff;
     border-radius: 300px;
@@ -62,9 +66,19 @@ body {
     align-items: center;
 }
 
+.a-container {
+    margin-top: 20px;
+}
+
 a {
     color: black;
     font-size: x-small;
     text-decoration: none;
-    margin-top: 20px;
+}
+
+input {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    font-family:'Courier New', Courier, monospace;
 }

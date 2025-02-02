@@ -11,7 +11,7 @@ async function start() {
     console.log(url);
     await scrapeSite(url);
     const textFieldDiv = document.getElementById('text-field');
-    const my_string = "\"" + post_title + post_content + "... \""
+    const my_string = "\"" + post_title + '-' + post_content + "... \""
     textFieldDiv.textContent = truncateString(my_string, 195);
 }
 
@@ -39,5 +39,30 @@ function truncateString(str, num) {
     return str.slice(0, num) + '... \"';
 }
 
+// Function to create a text entry box
+function createTextEntryBox() {
+    const container = document.getElementById('text-entry-container');
+    // Check if the text entry box already exists
+    if (!container.querySelector('input')) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = 'Enter your text here';
+        container.appendChild(input);
+        input.addEventListener('input', () => {
+            post_title = truncateString("\"" + input.value, 1000);
+            post_content = [];
+            console.log(post_title);
+            const textFieldDiv = document.getElementById('text-field');
+            textFieldDiv.textContent = truncateString("\"" + input.value, 195);
+        });
+    }
+}
+
 // Call the start function when the popup loads
 document.addEventListener('DOMContentLoaded', start);
+
+// Add event listeners to the buttons
+document.addEventListener('DOMContentLoaded', () => {
+    const textEntryButton = document.getElementById('text-entry-button');
+    textEntryButton.addEventListener('click', createTextEntryBox);
+});
