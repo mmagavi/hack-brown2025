@@ -11,22 +11,32 @@ async function start() {
     console.log(url);
     await scrapeSite(url);
     const textFieldDiv = document.getElementById('text-field');
-    textFieldDiv.textContent = post_title;
+    const my_string = "\"" + post_title + post_content + "... \""
+    textFieldDiv.textContent = truncateString(my_string, 195);
 }
 
 // Scraping the Reddit page for the post title and content
 async function scrapeSite(url) {
     try {
-        const response = await axios.get(url);
-        const $ = cheerio.load(response.data);
-        post_title = $('h1').first().text(); // Adjust selector as needed
-        $('div.text-neutral-content').each((i, elem) => {
-            const content = $(elem).find('p').text();
-            post_content.push(content);
+        const response = await fetch(url);
+        const text = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+        post_title = doc.querySelector('h1').textContent; // Adjust selector as needed
+        doc.querySelectorAll('div.text-neutral-content p').forEach((elem) => {
+            post_content.push(elem.textContent);
         });
     } catch (error) {
         console.error('Error scraping site:', error);
     }
+}
+
+// Function to truncate a string to a certain number of characters
+function truncateString(str, num) {
+    if (str.length <= num) {
+        return str;
+    }
+    return str.slice(0, num) + '... \"';
 }
 
 // Call the start function when the popup loads
