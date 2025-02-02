@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function generateResponse() {
     console.log('Generating response...');
     try {
+        let userContent = has_manual_input ? manual_input : post_content[0];
         const completion = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
             headers: {
@@ -104,7 +105,7 @@ async function generateResponse() {
                     {
                     // User role defines first message in the chat (post to respond to)
                         role: "user",
-                        content: post_content[0]
+                        content: userContent
                     },
                 ]
             })
@@ -124,11 +125,15 @@ function displayResponse() {
     const head2Div = document.querySelector('.head-2');
     const textFieldDiv = document.getElementById('text-field');
     const verifyButton = document.querySelector('button');
+    const manualTextButton = document.getElementById('text-entry-button');
+    const textEntryContainer = document.getElementById('text-entry-container');
 
     // Hide the elements
     head2Div.style.display = 'none';
     textFieldDiv.style.display = 'none';
     verifyButton.style.display = 'none';
+    manualTextButton.style.display = 'none';
+    textEntryContainer.style.display = 'none';
 
     // Create a new div to show the response
     const responseDiv = document.createElement('div');
@@ -148,6 +153,8 @@ function displayResponse() {
         head2Div.style.display = 'block';
         textFieldDiv.style.display = 'block';
         verifyButton.style.display = 'block';
+        manualTextButton.style.display = 'block';
+        textEntryContainer.style.display = 'block';
         responseDiv.remove();
         backButton.remove();
     });
