@@ -40,35 +40,37 @@ function truncateString(str, num) {
     return str.slice(0, num) + '... \"';
 }
 
-const OpenAI = require("openai");
-
-const openai = new OpenAI({ 
-    apiKey: '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'
-});
-
 //Function that feeds the post content to the GPT-4o model and generates a response
 async function generateResponse() {
     try {
-        const completion = await openai.chat.completions.create({
-            model: "gpt-4o-mini",
-            messages: [
-                // System role defines behavior + context (prompt)
-                { role: "system", content: `You are a user reading an online forum site about a certain disease. 
-                You want to be sure that the posts you are reading are not written in a misleading way or by relying heavily 
-                on anecdotes to make conclusions. Read this post, and find the central claim and the pieces of evidence used to support it. 
-                Classify each of those pieces of evidence as one of the following: anecdotal, unlikely to be supported by evidence, 
-                misleading, untrue, likely to be supported by evidence, not misleading, true.` },
-                {
-                // User role defines first message in the chat (post to respond to)
-                    role: "user",
-                    content: postContent[0],
-                },
-            ],
-            store: true,
+        const completion = await fetch("https://api.openai.com/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer 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'
+            },
+            body: JSON.stringify({
+                model: "gpt-4o-mini",
+                messages: [
+                    // System role defines behavior + context (prompt)
+                    { role: "system", content: `You are a user reading an online forum site about a certain disease. 
+                    You want to be sure that the posts you are reading are not written in a misleading way or by relying heavily 
+                    on anecdotes to make conclusions. Read this post, and find the central claim and the pieces of evidence used to support it. 
+                    Classify each of those pieces of evidence as one of the following: anecdotal, unlikely to be supported by evidence, 
+                    misleading, untrue, likely to be supported by evidence, not misleading, true.` },
+                    {
+                    // User role defines first message in the chat (post to respond to)
+                        role: "user",
+                        content: post_content[0]
+                    },
+                ]
+            })
         });
+        const data = await completion.json();
         // completion.choices[0].message provides the object for the response message
         // .content accesses the actual text output
-        response = completion.choices[0].message.content;
+        response = data.choices[0].message.content;
+        console.log(response);
     } catch (error) {
         console.error("Error fetching completion:", error);
     }
@@ -88,7 +90,8 @@ function displayResponse() {
     // Create a new div to show the response
     const responseDiv = document.createElement('div');
     responseDiv.classList.add('response');
-    responseDiv.textContent = response;
+    responseDiv.innerHTML = response.replace(/\n/g, '<br>') // Replace newlines with line breaks
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Replace bold markdown with HTML bold tags
     document.body.appendChild(responseDiv);
 
     // Create a back button with the same style

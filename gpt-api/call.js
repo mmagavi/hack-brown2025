@@ -9,7 +9,7 @@ const redditPostText = ""
 
 (async () => {
     try {
-        const completion = await openai.chat.completions.create({
+        const completion = await fetch("https://api.openai.com/v1/chat/completions", {
             model: "gpt-4o-mini",
             messages: [
                 // System role defines behavior + context (prompt)
