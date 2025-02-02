@@ -2,47 +2,17 @@
 
 # Contributors:
 
-Gianna Dyer
-
-Pranav Gundrala
-
+Gianna Dyer,
+Pranav Gundrala,
 Maya Magavi
 
-# Goals
+# verify.ai
 
-1. What our extension looks like upon opening
-2. How we get text + title from the page, get url from chrome for scraping
-3. API calls - ask the question to the model, input & output
-4. Output format, look
-5. Loading
-6. Design + messaging
-7. Stated goals
-8. Fun name
+Verify.ai is a chrome extension designed to help users avoid medical misinformation. It is currently adapted for reddit posts about medical experiences or ideas which may be based in anecdotal evidence or not backed by research. More informed patients will help create a better patient-doctor relationship and help those suffering from illness recieve a more accurate diagnosis faster. This could also be extended to a patient portal, where you can verify messages your medical provider has sent you. This could help 
 
-# Web Scraping
+Verify.ai automatically scrapes the content of a reddit post, but has a manual text entry feature for assessing comments on that post or other medical-related text.
 
-Using Nodejs, Cheerio, and Axios to scrape Reddit pages
+# Install
 
-Nodejs install: https://nodejs.org/
-
-Run in Terminal to Install: 
-
-```
-npm install axios cheerio
-```
-
-# API Call/Prompt
-gmail: verifyaiteam@gmail.com
-pass: verifyaiteam3?
-
-
-# Goals for tomorrow
-1. Fix README
-2. Make devpost
-3. Turn in form
-4. Practice Demo
-
-
-
-# Attribution
-"https://www.flaticon.com/free-icons/health"
+Add your OpenAI API key to popup.js
+Clone the repository and go to chrome://extensions, toggle 'developer mode' to on, press 'load unpacked' and select the folder for this project.

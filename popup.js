@@ -19,6 +19,14 @@ async function start() {
     textFieldDiv.textContent = truncateString(my_string, 195);
 }
 
+function getKey() {
+    fetch("api-key.txt")
+        .then(response => response.text())
+    .then(data => {
+        api_key = data;
+    });
+}
+
 // Scraping the Reddit page for the post title and content
 // In the future, this function can be expanded to scrape other sites
 async function scrapeSite(url) {
