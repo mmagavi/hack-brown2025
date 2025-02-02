@@ -8,6 +8,9 @@
       "default_icon": "heart2.png"
     },
     "permissions": [
-      "activeTab"
+      "activeTab",
+      "tabs",
+      "http://*/",
+     "https://*/"
     ]
   }

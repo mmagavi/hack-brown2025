@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="style.css">
-      </head>
-  <body>
-    <img src="heart2.png" alt="Heart icon"><h1> verify.ai </h1>
-    <script src="popup.js"></script>
-    <div class="head-2">Avoid anecdotal bias and medical misinformation by verifying the information on this page </div>
-    <div class ="text-field">"Text scraped from reddit page... "</div>
-    <button onclick="popup()">verify</button>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cheerio/dist/cheerio.min.js"></script>
+    <script src="popup.js" defer></script>
+</head>
+<body>
+    <img src="heart2.png" alt="Heart icon">
+    <h1>verify.ai</h1>
+    <div class="head-2">Avoid anecdotal bias and medical misinformation by verifying the information on this page</div>
+    <div id="text-field" class="text-field">"Loading... "</div>
+    <button>verify</button>
     <div><a href="https://www.flaticon.com/free-icons/health" title="health icons">Health icons created by Freepik - Flaticon</a></div>
-  </body>
+</body>
 </html>
