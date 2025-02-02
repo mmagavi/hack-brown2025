@@ -1,14 +1,14 @@
 console.log('This is a popup!');
 
-// Data needed throughout the script
+// Define variables to store the post title, content, and manual input
 let post_title = '';
 let post_content = [];
 let manual_input = '';
 let has_manual_input = false;
-let api_key = '';
 let response = '';
 
 // Get the current tab URL, and scrape the site for the post title and content
+// Store the post title and content to send to the API
 async function start() {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const url = tab.url;
@@ -28,13 +28,14 @@ function getKey() {
 }
 
 // Scraping the Reddit page for the post title and content
+// In the future, this function can be expanded to scrape other sites
 async function scrapeSite(url) {
     try {
         const response = await fetch(url);
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
-        post_title = doc.querySelector('h1').textContent; // Adjust selector as needed
+        post_title = doc.querySelector('h1').textContent; 
         doc.querySelectorAll('div.text-neutral-content p').forEach((elem) => {
             post_content.push(elem.textContent);
         });
@@ -99,15 +100,12 @@ async function generateResponse() {
                 model: "gpt-4o-mini",
                 messages: [
                     // System role defines behavior + context (prompt)
-                    { role: "system", content: `You are a user reading an online forum site about a certain disease. 
+                    { role: "system", content: `You are a user reading an online forum site about a certain medical issue. 
                     You want to be sure that the posts you are reading are not written in a misleading way or by relying heavily 
-                    on anecdotes to make conclusions about medical diagnoses. Read this post, and decide if it is making a claim about
-                    medical diagnoses, procedures, or general medical information. If so, find the central claim and the most important
-                    pieces of evidence used to support it. Classify each of those pieces of evidence as one of the following: anecdotal,
-                    unlikely to be supported by evidence, misleading, untrue, likely to be supported by evidence, not misleading, true.
-                    If the post is not making a claim about medical diagnoses, procedures, or general medical information, find the
-                    central claim and the pieces of evidence used to support it. Use bold text and bullet points to organize your
-                    response.` },
+                    on anecdotes to make conclusions. Read this post, and find the central claim and the pieces of evidence used to support it. 
+                    Classify important medical claims in the post as one of the following: personal experience, 
+                    anecdotal, unlikely to be supported by evidence, misleading, untrue, likely to be supported by evidence, not misleading, verifiable. 
+                    Back up classifications with reasoning, but treat posts and sensitive experiences with kindness. Keep your response concise` },
                     {
                     // User role defines first message in the chat (post to respond to)
                         role: "user",
@@ -171,12 +169,6 @@ function displayResponse() {
     });
 }
 
-//Generate and display response when verify button is clicked
-// document.querySelector('button').addEventListener('click', async () => {
-//     await generateResponse();
-//     displayResponse();
-// });
-
 // Call the start function when the popup loads
 document.addEventListener('DOMContentLoaded', start);
 //Generate and display response when verify button is clicked
@@ -188,3 +180,4 @@ verifyButton.addEventListener('click', async () => {
 
 const manualInputButton = document.getElementById('text-entry-button');
 manualInputButton.addEventListener('click', createTextEntryBox);
+
