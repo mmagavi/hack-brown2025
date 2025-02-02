@@ -14,4 +14,4 @@ Verify.ai automatically scrapes the content of a reddit post, but has a manual t
 
 # Install
 
-clone the repository and go to chrome://extensions, toggle 'developer mode' to on, press 'load unpacked' and select the folder for this project.
+Clone the repository and go to chrome://extensions, toggle 'developer mode' to on, press 'load unpacked' and select the folder for this project.
