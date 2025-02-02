@@ -141,7 +141,7 @@ function displayResponse() {
     // Create a back button with the same style
     const backButton = document.createElement('button');
     backButton.textContent = 'Back';
-    backButton.className = verifyButton.className; // Copy styles from verify button
+    backButton.className = 'backbutton';
     document.body.insertBefore(backButton, aContainer);
 
     // Add event listener to reset the UI when back is clicked
