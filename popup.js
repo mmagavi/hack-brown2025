@@ -3,6 +3,9 @@ console.log('This is a popup!');
 // Data needed throughout the script
 let post_title = '';
 let post_content = [];
+let manual_input = '';
+let has_manual_input = false;
+
 let response = '';
 
 // Get the current tab URL, and scrape the site for the post title and content
@@ -40,21 +43,31 @@ function truncateString(str, num) {
     return str.slice(0, num) + '... \"';
 }
 
-// Function to create a text entry box
+// Function to create or toggle the text entry box
 function createTextEntryBox() {
     const container = document.getElementById('text-entry-container');
-    // Check if the text entry box already exists
-    if (!container.querySelector('input')) {
+    const textEntryButton = document.getElementById('text-entry-button');
+    const existingInput = container.querySelector('input');
+    if (existingInput) {
+        // If the input exists, remove it
+        container.removeChild(existingInput);
+        textEntryButton.textContent = 'Manual Text Entry';
+        const textFieldDiv = document.getElementById('text-field');
+        const my_string = "\"" + post_title + '-' + post_content + "... \""
+        has_manual_input = false;
+        textFieldDiv.textContent = truncateString(my_string, 195);
+    } else {
+        // If the input does not exist, create it
         const input = document.createElement('input');
         input.type = 'text';
         input.placeholder = 'Enter your text here';
         container.appendChild(input);
+        textEntryButton.textContent = 'Automatic Text Entry';
         input.addEventListener('input', () => {
-            post_title = truncateString("\"" + input.value, 1000);
-            post_content = [];
-            console.log(post_title);
+            manual_input = input.value;
+            has_manual_input = true;
             const textFieldDiv = document.getElementById('text-field');
-            textFieldDiv.textContent = truncateString("\"" + input.value, 195);
+            textFieldDiv.textContent = truncateString("\"" + manual_input + "\"", 195);
         });
     }
 }
@@ -67,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const textEntryButton = document.getElementById('text-entry-button');
     textEntryButton.addEventListener('click', createTextEntryBox);
 })
+
 
 const OpenAI = require("openai");
 
