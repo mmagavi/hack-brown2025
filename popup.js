@@ -110,7 +110,7 @@ async function generateResponse() {
             })
         });
         const data = await completion.json();
-        // completion.choices[0].message provides the object for the response message
+        // data.choices[0].message provides the object for the response message
         // .content accesses the actual text output
         response = data.choices[0].message.content;
         console.log(response);
@@ -163,7 +163,8 @@ function displayResponse() {
 // Call the start function when the popup loads
 document.addEventListener('DOMContentLoaded', start);
 //Generate and display response when verify button is clicked
-document.querySelector('button').addEventListener('click', async () => {
+const verifyButton = document.getElementById('verify-button');
+verifyButton.addEventListener('click', async () => {
     await generateResponse();
     displayResponse();
 });
