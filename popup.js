@@ -91,11 +91,12 @@ async function generateResponse() {
                 model: "gpt-4o-mini",
                 messages: [
                     // System role defines behavior + context (prompt)
-                    { role: "system", content: `You are a user reading an online forum site about a certain disease. 
+                    { role: "system", content: `You are a user reading an online forum site about a certain medical issue. 
                     You want to be sure that the posts you are reading are not written in a misleading way or by relying heavily 
                     on anecdotes to make conclusions. Read this post, and find the central claim and the pieces of evidence used to support it. 
-                    Classify each of those pieces of evidence as one of the following: anecdotal, unlikely to be supported by evidence, 
-                    misleading, untrue, likely to be supported by evidence, not misleading, true.` },
+                    Classify important medical claims in the post as one of the following: personal experience, 
+                    anecdotal, unlikely to be supported by evidence, misleading, untrue, likely to be supported by evidence, not misleading, verifiable. 
+                    Back up classifications with reasoning, but treat posts and sensitive experiences with kindness. Keep your response concise` },
                     {
                     // User role defines first message in the chat (post to respond to)
                         role: "user",
@@ -121,7 +122,8 @@ function displayResponse() {
     const verifyButton = document.getElementById('verify-button');
     const manualTextButton = document.getElementById('text-entry-button');
     const textEntryContainer = document.getElementById('text-entry-container');
-
+    const aContainer = document.querySelector('.a-container');
+    
     // Hide the elements
     verifyButton.style.display = 'none';
     head2Div.style.display = 'none';
@@ -135,13 +137,13 @@ function displayResponse() {
     responseDiv.classList.add('response');
     responseDiv.innerHTML = response.replace(/\n/g, '<br>') // Replace newlines with line breaks
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Replace bold markdown with HTML bold tags
-    document.body.appendChild(responseDiv);
+    document.body.insertBefore(responseDiv, aContainer);
 
     // Create a back button with the same style
     const backButton = document.createElement('button');
     backButton.textContent = 'Back';
     backButton.className = 'backbutton';
-    document.body.appendChild(backButton);
+    document.body.insertBefore(backButton, aContainer);
 
     // Add event listener to reset the UI when back is clicked
     backButton.addEventListener('click', () => {
@@ -157,12 +159,6 @@ function displayResponse() {
         backButton.remove();
     });
 }
-
-//Generate and display response when verify button is clicked
-// document.querySelector('button').addEventListener('click', async () => {
-//     await generateResponse();
-//     displayResponse();
-// });
 
 // Call the start function when the popup loads
 document.addEventListener('DOMContentLoaded', start);
