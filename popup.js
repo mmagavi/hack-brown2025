@@ -126,7 +126,8 @@ function displayResponse() {
     const verifyButton = document.querySelector('button');
     const manualTextButton = document.getElementById('text-entry-button');
     const textEntryContainer = document.getElementById('text-entry-container');
-
+    const aContainer = document.querySelector('.a-container');
+    
     // Hide the elements
     head2Div.style.display = 'none';
     textFieldDiv.style.display = 'none';
@@ -139,13 +140,13 @@ function displayResponse() {
     responseDiv.classList.add('response');
     responseDiv.innerHTML = response.replace(/\n/g, '<br>') // Replace newlines with line breaks
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Replace bold markdown with HTML bold tags
-    document.body.appendChild(responseDiv);
+    document.body.insertBefore(responseDiv, aContainer);
 
     // Create a back button with the same style
     const backButton = document.createElement('button');
     backButton.textContent = 'Back';
     backButton.className = verifyButton.className; // Copy styles from verify button
-    document.body.appendChild(backButton);
+    document.body.insertBefore(backButton, aContainer);
 
     // Add event listener to reset the UI when back is clicked
     backButton.addEventListener('click', () => {
