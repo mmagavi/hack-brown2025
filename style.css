@@ -82,6 +82,11 @@ a {
     color: black;
     font-size: x-small;
     text-decoration: none;
+    padding: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 input {
@@ -93,4 +98,8 @@ input {
 
 .backbutton {
     margin-top: 20px;
+}
+
+.subscript {
+    font-size: x-small;
 }
