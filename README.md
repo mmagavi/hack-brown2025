@@ -36,6 +36,12 @@ gmail: verifyaiteam@gmail.com
 pass: verifyaiteam3?
 
 
+# Goals for tomorrow
+1. Fix README
+2. Make devpost
+3. Turn in form
+4. Practice Demo
+
 
 
 # Attribution
