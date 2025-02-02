@@ -1,14 +1,14 @@
 console.log('This is a popup!');
 
-// Data needed throughout the script
+// Define variables to store the post title, content, and manual input
 let post_title = '';
 let post_content = [];
 let manual_input = '';
 let has_manual_input = false;
-
 let response = '';
 
 // Get the current tab URL, and scrape the site for the post title and content
+// Store the post title and content to send to the API
 async function start() {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const url = tab.url;
@@ -20,13 +20,14 @@ async function start() {
 }
 
 // Scraping the Reddit page for the post title and content
+// In the future, this function can be expanded to scrape other sites
 async function scrapeSite(url) {
     try {
         const response = await fetch(url);
         const text = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(text, 'text/html');
-        post_title = doc.querySelector('h1').textContent; // Adjust selector as needed
+        post_title = doc.querySelector('h1').textContent; 
         doc.querySelectorAll('div.text-neutral-content p').forEach((elem) => {
             post_content.push(elem.textContent);
         });
@@ -171,3 +172,4 @@ verifyButton.addEventListener('click', async () => {
 
 const manualInputButton = document.getElementById('text-entry-button');
 manualInputButton.addEventListener('click', createTextEntryBox);
+
