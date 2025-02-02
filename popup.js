@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //Function that feeds the post content to the GPT-4o model and generates a response
 async function generateResponse() {
+    console.log('Generating response...');
     try {
         const completion = await fetch("https://api.openai.com/v1/chat/completions", {
             method: "POST",
@@ -152,9 +153,9 @@ function displayResponse() {
     });
 }
 
-
 // Call the start function when the popup loads
 document.addEventListener('DOMContentLoaded', start);
+
 //Generate and display response when verify button is clicked
 document.querySelector('button').addEventListener('click', async () => {
     await generateResponse();
