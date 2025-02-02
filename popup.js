@@ -72,15 +72,6 @@ function createTextEntryBox() {
     }
 }
 
-// Call the start function when the popup loads
-document.addEventListener('DOMContentLoaded', start);
-
-// Add event listeners to the buttons
-document.addEventListener('DOMContentLoaded', () => {
-    const textEntryButton = document.getElementById('text-entry-button');
-    textEntryButton.addEventListener('click', createTextEntryBox);
-})
-
 
 //Function that feeds the post content to the GPT-4o model and generates a response
 async function generateResponse() {
@@ -160,11 +151,21 @@ function displayResponse() {
     });
 }
 
+//Generate and display response when verify button is clicked
+// document.querySelector('button').addEventListener('click', async () => {
+//     await generateResponse();
+//     displayResponse();
+// });
+
 // Call the start function when the popup loads
 document.addEventListener('DOMContentLoaded', start);
 
-//Generate and display response when verify button is clicked
-document.querySelector('button').addEventListener('click', async () => {
-    await generateResponse();
-    displayResponse();
-});
+// Add event listeners to the buttons
+document.addEventListener('DOMContentLoaded', () => {
+    const verifyButton = document.getElementById('verify-button');
+    verifyButton.addEventListener('click', generateResponse);
+
+    const textEntryButton = document.getElementById('text-entry-button');
+    textEntryButton.addEventListener('click', createTextEntryBox);
+})
+
